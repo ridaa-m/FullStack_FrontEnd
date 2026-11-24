@@ -1,5 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
+// Stores lessons added to the shopping cart
+const cart = ref([]);
 
 // stores all lessons fetched from the backend
 const lessons = ref([]);
@@ -32,15 +34,24 @@ onMounted(async () => {
     console.error(error);
   }
 });
+
+// Add a lesson to the cart
+function addToCart(lesson) {
+  cart.value.push(lesson);
+}
 </script>
 
 <template>
   <div class="container">
     <h1>After School Lessons</h1>
 
-    <!-- Dropdown for sorting -->
+    <!-- Cart Counter -->
 
-    <label for="sort">Sort By:</label>
+    <h3>Cart Items: {{ cart.length }}</h3>
+
+    <!-- Sorting Dropdown -->
+
+    <label for="sort"> Sort By: </label>
 
     <select id="sort" v-model="sortBy">
       <option value="topic">Subject</option>
@@ -69,7 +80,15 @@ onMounted(async () => {
         {{ lesson.space }}
       </p>
 
-      <button>Add to Cart</button>
+      <button @click="addToCart(lesson)">Add to Cart</button>
+    </div>
+
+    <!-- Shopping Cart -->
+
+    <h2>Shopping Cart</h2>
+
+    <div v-for="item in cart" :key="item._id" class="lesson-card">
+      {{ item.topic }}
     </div>
   </div>
 </template>
