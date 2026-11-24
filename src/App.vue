@@ -19,19 +19,26 @@ console.error(error)
 </script>
 
 <template>
-  
-<div>
+  <div class="container">
 
-<h1>After School Lessons</h1>
+    <h1>After School Lessons</h1>
 
-<div
- v-for="lesson in lessons"
-:key="lesson._id"
-  >
-  <h2>{{ lesson.topic }}</h2>
-  <p>Location: {{ lesson.location }}</p>
-  <p>Price: £{{ lesson.price }}</p>
-  <p>Spaces: {{ lesson.space }}</p>
-</div>
-</div>
+    <div
+      class="lesson-card"
+      v-for="lesson in lessons"
+      :key="lesson._id"
+    >
+      <h2>{{ lesson.topic }}</h2>
+
+      <p>Location: {{ lesson.location }}</p>
+
+      <p>Price: £{{ lesson.price }}</p>
+
+      <p>Spaces: {{ lesson.space }}</p>
+
+      <button>Add to Cart</button>
+
+    </div>
+
+  </div>
 </template>

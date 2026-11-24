@@ -294,3 +294,38 @@ code {
     border-right-color: var(--border);
   }
 }
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+
+button {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.lesson-card {
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: #390252;
+}
+
+.lesson-card h2 {
+  margin-top: 0;
+}
+
+.lesson-card button {
+  padding: 10px 15px;
+  cursor: pointer;
+}
