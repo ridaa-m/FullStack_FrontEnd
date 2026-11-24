@@ -312,19 +312,131 @@ button {
   padding: 20px;
 }
 
-.lesson-card {
-  border: 1px solid white;
+body {
+  background-color: #f4f7fb;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px;
+}
+
+/* Header */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  color: #0f172a;
+  margin: 0;
+}
+
+/* Cart */
+
+.cart-button {
+  background-color: #1e3a8a;
+  color: white;
+  border: none;
+  padding: 12px 20px;
   border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
-  background-color: #390252;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.cart-button:hover {
+  background-color: #1d4ed8;
+}
+
+/* Cart Panel */
+
+.cart-panel {
+  background-color: #1e3a8a;
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+}
+
+.cart-item {
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding: 12px 0;
+}
+
+.cart-item button {
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Sorting */
+
+.sort-section {
+  margin-bottom: 25px;
+}
+
+.sort-section label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.sort-section select {
+  padding: 10px;
+  border-radius: 6px;
+}
+
+/* Lesson Grid */
+
+.lesson-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Lesson Cards */
+
+.lesson-card {
+  background-color: #1e3a8a;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .lesson-card h2 {
+  color: white;
   margin-top: 0;
 }
 
+.lesson-card p {
+  color: white;
+}
+
+/* Add To Cart Button */
+
 .lesson-card button {
-  padding: 10px 15px;
+  width: 100%;
+  background-color: #16a34a;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: bold;
+}
+
+.lesson-card button:hover {
+  background-color: #15803d;
 }

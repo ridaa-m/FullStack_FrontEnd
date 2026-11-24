@@ -13,6 +13,16 @@ const lessons = ref([]);
 
 const sortBy = ref("topic");
 
+// Controls whether the cart is visible
+
+const showCart = ref(false);
+
+// Shows or hides the cart
+
+function toggleCart() {
+  showCart.value = !showCart.value;
+}
+
 // Sort Lessons
 
 const sortedLessons = computed(() => {
@@ -62,72 +72,80 @@ function removeFromCart(index) {
 
 <template>
   <div class="container">
-    <h1>After School Lessons</h1>
+    <!-- Header -->
 
-    <!-- Cart Counter -->
+    <div class="header">
+      <h1>After School Lessons</h1>
 
-    <h3>Cart Items: {{ cart.length }}</h3>
-
-    <!-- Sorting Dropdown -->
-
-    <label for="sort">Sort By:</label>
-
-    <select id="sort" v-model="sortBy">
-      <option value="topic">Subject</option>
-
-      <option value="location">Location</option>
-
-      <option value="price">Price</option>
-
-      <option value="space">Spaces</option>
-    </select>
-
-    <!-- Lesson Cards -->
-
-    <div class="lesson-card" v-for="lesson in sortedLessons" :key="lesson._id">
-      <h2>{{ lesson.topic }}</h2>
-
-      <p>
-        <strong>Location:</strong>
-
-        {{ lesson.location }}
-      </p>
-
-      <p>
-        <strong>Price:</strong>
-
-        £{{ lesson.price }}
-      </p>
-
-      <p>
-        <strong>Spaces:</strong>
-
-        {{ lesson.space }}
-      </p>
-
-      <button @click="addToCart(lesson)">Add To Cart</button>
+      <button class="cart-button" @click="toggleCart()">
+        🛒 Cart ({{ cart.length }})
+      </button>
     </div>
 
     <!-- Shopping Cart -->
 
-    <h2>Shopping Cart</h2>
+    <div v-if="showCart" class="cart-panel">
+      <h2>Shopping Cart</h2>
 
-    <div v-for="(item, index) in cart" :key="index" class="lesson-card">
-      <h3>{{ item.topic }}</h3>
+      <div v-if="cart.length === 0">
+        <p>Your cart is empty.</p>
+      </div>
 
-      <p>
-        <strong>Location:</strong>
+      <div v-for="(item, index) in cart" :key="index" class="cart-item">
+        <h3>{{ item.topic }}</h3>
 
-        {{ item.location }}
-      </p>
+        <p>£{{ item.price }}</p>
 
-      <p>
-        <strong>Price:</strong>
+        <button @click="removeFromCart(index)">Remove</button>
+      </div>
+    </div>
 
-        £{{ item.price }}
-      </p>
+    <!-- Sort Dropdown -->
 
-      <button @click="removeFromCart(index)">Remove From Cart</button>
+    <div class="sort-section">
+      <label for="sort"> Sort By: </label>
+
+      <select id="sort" v-model="sortBy">
+        <option value="topic">Subject</option>
+
+        <option value="location">Location</option>
+
+        <option value="price">Price</option>
+
+        <option value="space">Spaces</option>
+      </select>
+    </div>
+
+    <!-- Lesson Cards -->
+
+    <div class="lesson-grid">
+      <div
+        class="lesson-card"
+        v-for="lesson in sortedLessons"
+        :key="lesson._id"
+      >
+        <h2>{{ lesson.topic }}</h2>
+
+        <p>
+          <strong>Location:</strong>
+
+          {{ lesson.location }}
+        </p>
+
+        <p>
+          <strong>Price:</strong>
+
+          £{{ lesson.price }}
+        </p>
+
+        <p>
+          <strong>Spaces:</strong>
+
+          {{ lesson.space }}
+        </p>
+
+        <button @click="addToCart(lesson)">Add To Cart</button>
+      </div>
     </div>
   </div>
 </template>
