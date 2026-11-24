@@ -1,12 +1,16 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
+
 // Stores lessons added to the shopping cart
+
 const cart = ref([]);
 
 // stores all lessons fetched from the backend
+
 const lessons = ref([]);
 
 // Stores the selected option sorted
+
 const sortBy = ref("topic");
 
 // Sort Lessons
@@ -36,8 +40,23 @@ onMounted(async () => {
 });
 
 // Add a lesson to the cart
+
 function addToCart(lesson) {
-  cart.value.push(lesson);
+  if (lesson.space > 0) {
+    cart.value.push(lesson);
+
+    lesson.space--;
+  }
+}
+
+// Remove a lesson from the cart
+
+function removeFromCart(index) {
+  const lesson = cart.value[index];
+
+  lesson.space++;
+
+  cart.value.splice(index, 1);
 }
 </script>
 
@@ -51,12 +70,15 @@ function addToCart(lesson) {
 
     <!-- Sorting Dropdown -->
 
-    <label for="sort"> Sort By: </label>
+    <label for="sort">Sort By:</label>
 
     <select id="sort" v-model="sortBy">
       <option value="topic">Subject</option>
+
       <option value="location">Location</option>
+
       <option value="price">Price</option>
+
       <option value="space">Spaces</option>
     </select>
 
@@ -67,28 +89,45 @@ function addToCart(lesson) {
 
       <p>
         <strong>Location:</strong>
+
         {{ lesson.location }}
       </p>
 
       <p>
         <strong>Price:</strong>
+
         £{{ lesson.price }}
       </p>
 
       <p>
         <strong>Spaces:</strong>
+
         {{ lesson.space }}
       </p>
 
-      <button @click="addToCart(lesson)">Add to Cart</button>
+      <button @click="addToCart(lesson)">Add To Cart</button>
     </div>
 
     <!-- Shopping Cart -->
 
     <h2>Shopping Cart</h2>
 
-    <div v-for="item in cart" :key="item._id" class="lesson-card">
-      {{ item.topic }}
+    <div v-for="(item, index) in cart" :key="index" class="lesson-card">
+      <h3>{{ item.topic }}</h3>
+
+      <p>
+        <strong>Location:</strong>
+
+        {{ item.location }}
+      </p>
+
+      <p>
+        <strong>Price:</strong>
+
+        £{{ item.price }}
+      </p>
+
+      <button @click="removeFromCart(index)">Remove From Cart</button>
     </div>
   </div>
 </template>
